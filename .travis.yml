@@ -3,7 +3,7 @@ services:
   - docker
 
 before_install:
-  - docker build ganga25/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t ganga25/react-test -f ./client/Dockerfile.dev ./client
 
 scripts:
   - docker run -e CI=true ganga25/react-test npm test
