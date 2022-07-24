@@ -17,4 +17,4 @@ after_succes:
   - docker push ganga25/multi-client
   - docker push ganga25/multi-nginx
   - docker push ganga25/multi-server
-  - docker push ganga25/multi-client
+  - docker push ganga25/multi-worker
