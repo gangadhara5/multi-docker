@@ -1,0 +1,20 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build ganga25/react-test -f ./client/Dockerfile.dev ./client
+
+scripts:
+  - docker run -e CI=true ganga25/react-test npm test
+
+after_succes:
+  - docker build -t ganga25/multi-client ./client
+  - docker build -t ganga25/multi-nginx ./nginx
+  - docker build -t ganga25/multi-server ./server
+  - docker build -t ganga25/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push ganga25/multi-client
+  - docker push ganga25/multi-nginx
+  - docker push ganga25/multi-server
+  - docker push ganga25/multi-client
